@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\MasterData\CategoriesController;
 use App\Http\Controllers\Admin\MasterData\FasilitasController;
 use App\Http\Controllers\Admin\MasterData\KostController;
 use App\Http\Controllers\Admin\MasterData\PenyewaanController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomePage\KostApa\KostApaController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,14 @@ use App\Http\Controllers\Admin\MasterData\PenyewaanController;
 */
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('home-page')->group(function () {
+    Route::prefix('kost-apa')->group(function () {
+        Route::get('kost-putra', [KostApaController::class, 'kostPutra'])->name('kost-putra');
+        Route::get('kost-putri', [KostApaController::class, 'kostPutri'])->name('kost-putri');
+        Route::get('kost-campuran', [KostApaController::class, 'kostCampuran'])->name('kost-campuran');
+    });
 });
 
 
